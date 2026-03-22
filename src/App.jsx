@@ -7,7 +7,7 @@ import ProjectDetails from "./pages/ProjectDetails";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<About />} />
         <Route path="/about" element={<About />} />
@@ -15,7 +15,7 @@ function App() {
         <Route path="/project/:id" element={<ProjectDetails />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
