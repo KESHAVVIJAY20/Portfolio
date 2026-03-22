@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   FaFacebook,
   FaGithub,
@@ -8,11 +8,10 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import { HiMenu, HiX } from "react-icons/hi";
-import Logo from "../assets/Logo.png";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-
+    const navigate = useNavigate();
   const phoneNumber = "9352515020";
   const message = "Hello, I Want to Connect With You.";
   const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
@@ -22,13 +21,13 @@ export default function Header() {
         {/* Logo */}
         <p
           className="cursor-pointer text-3xl font-serif text-green-600"
-          onClick={() => (
-            (window.location.href = "/"),
-            window.scrollTo({ top: 0, behavior: "smooth" })
-          )}
+          onClick={() => {
+            navigate("/"); // ✅ go to home
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
         >
           KESHAV
-          <span className="text-black text-sm">V I J A Y V E R G I Y A</span>
+          <span className="text-black text-sm"> V I J A Y V E R G I Y A</span>
         </p>
 
         {/* Desktop Menu */}
