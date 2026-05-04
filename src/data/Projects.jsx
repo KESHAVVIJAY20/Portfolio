@@ -18,7 +18,7 @@ const projects = [
     tech: ["React", "Tailwind"],
     description: "Frontend website for a Biomass Pallets company.",
     github: "https://github.com/KESHAVVIJAY20/Thermo-Green-Energy",
-    live: "https://keshavvijay20.github.io/Thermo-Green-Energy/",
+    live: "https://thermo-green-energy.vercel.app/",
   },
   {
     id: 3,

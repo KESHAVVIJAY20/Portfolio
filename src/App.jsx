@@ -5,8 +5,17 @@ import Contact from "./pages/Contact";
 import Projects from "./pages/Projects";
 import ProjectDetails from "./pages/ProjectDetails";
 import ScrollToTop from "./components/ScrolltoTop";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
   return (
     <HashRouter>
       <ScrollToTop />

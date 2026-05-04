@@ -1,52 +1,70 @@
 import { useParams } from "react-router-dom";
 import projects from "../data/Projects.jsx";
 import Header from "../components/Header.jsx";
+import Footer from "../components/Footer.jsx";
 import ProjectCard from "../components/ProjectCard.jsx";
 
 function ProjectDetails() {
   const { id } = useParams();
   const project = projects.find((p) => p.id === parseInt(id));
 
-  const relatedProjects = projects.filter(
-    (p) => p.id !== parseInt(id)
-  );
+  const relatedProjects = projects.filter((p) => p.id !== parseInt(id));
 
   return (
-    <div>
+    <div className="bg-[#0B0F19] text-white min-h-screen">
       <Header />
-      <div className="p-10">
-        <img
-          src={project.image}
-          className="w-full h-80 object-contain rounded-xl border-2 border-gray-300"
-        />
 
-        <h1 className="text-3xl font-bold mt-5">{project.title}</h1>
+      <section className="max-w-5xl mx-auto px-6 py-20">
+        {/* Image */}
+        <div className="relative">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full rounded-2xl shadow-xl h-80 object-contain border-2 border-gray-300"
+          />
+          <div className="absolute inset-0 bg-indigo-500/10 blur-2xl -z-10"></div>
+        </div>
 
-        <p className="mt-3 text-gray-600">{project.description}</p>
+        {/* Title */}
+        <h1 className="text-4xl font-bold mt-10">{project.title}</h1>
 
-        <div className="flex gap-4 mt-5">
+        {/* Description */}
+        <p className="mt-5 text-gray-400 leading-relaxed">
+          {project.description}
+        </p>
+
+        {/* Buttons */}
+        <div className="flex gap-4 mt-8">
           <a
             href={project.github}
             target="_blank"
-            className="bg-black text-white px-4 py-2 rounded"
+            className="px-6 py-3 rounded-lg border border-gray-600 hover:bg-white/10 transition"
           >
-            GitHub
+            View Code
           </a>
+
           <a
             href={project.live}
             target="_blank"
-            className="bg-green-500 text-white px-4 py-2 rounded"
+            className="px-6 py-3 rounded-lg bg-indigo-500 hover:bg-indigo-600 transition"
           >
             Live Demo
           </a>
         </div>
+      </section>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-10 p-10">
+      {/* Related Projects */}
+      <section className="max-w-7xl mx-auto px-6 pb-20">
+        <h2 className="text-2xl font-semibold mb-10">More Projects</h2>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {relatedProjects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>
-      </div>
+      </section>
+
+      <Footer />
     </div>
   );
 }

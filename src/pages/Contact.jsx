@@ -4,7 +4,6 @@ import {
   FaLinkedin,
   FaEnvelope,
   FaLocationArrow,
-  FaFacebook,
   FaInstagram,
   FaWhatsapp,
 } from "react-icons/fa";
@@ -17,12 +16,8 @@ function Contact() {
   const form = useRef();
 
   const phoneNumber = "9352515020";
-  const message =
-    "Hello, I want to know more about your Products & Services.";
-
-  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-    message
-  )}`;
+  const message = "Hello, I want to connect with you!";
+  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -32,7 +27,7 @@ function Contact() {
         import.meta.env.VITE_EMAIL_SERVICE_ID,
         import.meta.env.VITE_EMAIL_TEMPLATE_ID,
         form.current,
-        import.meta.env.VITE_EMAIL_PUBLIC_KEY
+        import.meta.env.VITE_EMAIL_PUBLIC_KEY,
       )
       .then(
         () => {
@@ -42,98 +37,96 @@ function Contact() {
         (error) => {
           console.error(error);
           toast.error("Failed to send message ❌");
-        }
+        },
       );
   };
 
   return (
-    <div>
+    <div className="bg-[#0B0F19] text-white min-h-screen">
       <Header />
       <Toaster position="top-right" />
 
-      <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-        <div className="max-w-5xl w-full bg-white rounded-2xl shadow-lg grid md:grid-cols-2 overflow-hidden">
-          
-          {/* LEFT SIDE */}
-          <div className="bg-linear-to-br from-green-500 to-green-700 text-white p-8 flex flex-col justify-center">
-            <h2 className="text-3xl font-bold mb-4">Let's Connect 👋</h2>
-            <p className="mb-6 text-sm">
-              Feel free to reach out for collaborations or just a friendly hello!
+      <section className="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+        {/* LEFT SIDE */}
+        <div>
+          <h2 className="text-4xl font-bold mb-4">Let's Connect 👋</h2>
+
+          <p className="text-gray-400 mb-8 max-w-md">
+            I'm always open to discussing new projects, creative ideas, or
+            opportunities to be part of your vision.
+          </p>
+
+          <div className="space-y-4 text-gray-400">
+            <p className="flex items-center gap-3">
+              <FaEnvelope />
+              keshavvijay8@gmail.com
             </p>
 
-            <div className="space-y-4">
-              <p className="flex items-center gap-3">
-                <FaEnvelope /> keshavvijay8@gmail.com
-              </p>
-              <p className="flex items-center gap-3">
-                <FaLocationArrow /> 426, keshavpura, sector-7, Kota (Rajasthan)
-                324009
-              </p>
-
-              <div className="flex gap-6 mt-10 text-2xl justify-center">
-                <a href="https://www.facebook.com/thermogreenenergy" target="_blank" rel="noreferrer">
-                  <FaFacebook />
-                </a>
-                <a href="https://www.github.com/KESHAVVIJAY20" target="_blank" rel="noreferrer">
-                  <FaGithub />
-                </a>
-                <a href="https://www.linkedin.com/company/thermogreenenergy" target="_blank" rel="noreferrer">
-                  <FaLinkedin />
-                </a>
-                <a href="https://www.instagram.com/keshavvj_20" target="_blank" rel="noreferrer">
-                  <FaInstagram />
-                </a>
-                <a href={url} target="_blank" rel="noreferrer">
-                  <FaWhatsapp />
-                </a>
-              </div>
-            </div>
+            <p className="flex items-center gap-3">
+              <FaLocationArrow />
+              Kota, Rajasthan, India
+            </p>
           </div>
 
-          {/* RIGHT SIDE FORM */}
-          <div className="p-8">
-            <h2 className="text-2xl font-semibold mb-6">Send a Message</h2>
-
-            <form ref={form} onSubmit={sendEmail} className="space-y-4">
-              
-              {/* Name */}
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                required
-                className="w-full border p-3 rounded-lg outline-none focus:ring-2 focus:ring-green-500"
-              />
-
-              {/* Email */}
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                required
-                className="w-full border p-3 rounded-lg outline-none focus:ring-2 focus:ring-green-500"
-              />
-
-              {/* Message */}
-              <textarea
-                name="message"
-                rows="4"
-                placeholder="Your Message"
-                required
-                className="w-full border p-3 rounded-lg outline-none focus:ring-2 focus:ring-green-500"
-              ></textarea>
-
-              {/* Button */}
-              <button
-                type="submit"
-                className="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition"
+          {/* Social Icons */}
+          <div className="flex gap-4 mt-8">
+            {[
+              { icon: <FaGithub />, link: "https://github.com" },
+              { icon: <FaLinkedin />, link: "https://linkedin.com" },
+              { icon: <FaInstagram />, link: "https://instagram.com" },
+              { icon: <FaWhatsapp />, link: url },
+            ].map((item, i) => (
+              <a
+                key={i}
+                href={item.link}
+                target="_blank"
+                rel="noreferrer"
+                className="p-3 rounded-lg bg-white/5 hover:bg-indigo-500/20 transition"
               >
-                Send Message
-              </button>
-            </form>
+                {item.icon}
+              </a>
+            ))}
           </div>
         </div>
-      </div>
+
+        {/* RIGHT SIDE FORM */}
+        <div className="bg-white/5 backdrop-blur-lg border border-white/10 p-8 rounded-2xl shadow-lg">
+          <h2 className="text-2xl font-semibold mb-6">Send a Message</h2>
+
+          <form ref={form} onSubmit={sendEmail} className="space-y-5">
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              required
+              className="w-full bg-transparent border border-gray-700 p-3 rounded-lg focus:outline-none focus:border-indigo-500 transition"
+            />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+              className="w-full bg-transparent border border-gray-700 p-3 rounded-lg focus:outline-none focus:border-indigo-500 transition"
+            />
+
+            <textarea
+              name="message"
+              rows="4"
+              placeholder="Your Message"
+              required
+              className="w-full bg-transparent border border-gray-700 p-3 rounded-lg focus:outline-none focus:border-indigo-500 transition"
+            ></textarea>
+
+            <button
+              type="submit"
+              className="w-full bg-indigo-500 hover:bg-indigo-600 py-3 rounded-lg transition font-medium"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </section>
 
       <Footer />
     </div>
